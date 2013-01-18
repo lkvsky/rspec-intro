@@ -43,7 +43,9 @@ end
 describe TowersOfHanoi do
   subject(:tower) { TowersOfHanoi.new }
 
-  its(:towers) { should eq([[], [], []]) }
+  describe "#initialize" do
+    its(:towers) { should eq([[3, 2, 1], [], []])}
+  end
 
   describe "#get_move" do
     it "should return an array" do
@@ -54,7 +56,22 @@ describe TowersOfHanoi do
   describe "#valid_move?" do
     it "should return false if input does not contain two values" do
       input = [0, 1, 2]
-      valid_move?(input).should == false
+      tower.valid_move?(input).should be_false
+    end
+
+    it "should only contain values between 0 and 2" do
+      bad1, bad2, good = [-1, 1], [1, 3], [1, 2]
+      tower.valid_move?(bad1).should be_false
+      tower.valid_move?(bad2).should be_false
+      tower.valid_move?(good).should be_true
+    end
+  end
+
+  describe "#make_move" do
+    it "should move a value to a new tower" do
+      move = [0, 1]
+      tower.make_move(move)
+      tower.towers[0].length.should == 2
     end
   end
 end

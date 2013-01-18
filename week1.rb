@@ -25,15 +25,26 @@ class TowersOfHanoi
 
   def initialize
     @towers = Array.new(3) { [] }
+    @towers[0] = [3, 2, 1]
   end
 
   def get_move
     puts "what's your move"
     input = gets.chomp.split
+    input.map! { |value| value.to_i }
   end
 
   def valid_move?(move)
     return false if move.length != 2
+    move.each do |num|
+      return false if num > 2 || num < 0
+    end
+  end
+
+  def make_move(move)
+    start_tower = @towers[move[0]]
+    end_tower = @towers[move[1]]
+    end_tower << start_tower.pop
   end
 end
 
