@@ -1,6 +1,5 @@
 require 'rspec'
 require_relative 'week1'
-
 describe "#my_uniq" do
 
   it "returns a new array" do
@@ -54,16 +53,23 @@ describe TowersOfHanoi do
   end
 
   describe "#valid_move?" do
+    before(:each) do
+      tower.towers[1] = [1, 2, 3]
+      tower.towers[2] = [0]
+    end
     it "should return false if input does not contain two values" do
       input = [0, 1, 2]
       tower.valid_move?(input).should be_false
     end
 
     it "should only contain values between 0 and 2" do
-      bad1, bad2, good = [-1, 1], [1, 3], [1, 2]
+      bad1, bad2 = [-1, 1], [1, 3]
       tower.valid_move?(bad1).should be_false
       tower.valid_move?(bad2).should be_false
-      tower.valid_move?(good).should be_true
+    end
+
+    it "should not allow larger pieces on top of smaller pieces" do
+      tower.valid_move?([1,2]).should be_false
     end
   end
 
@@ -72,6 +78,7 @@ describe TowersOfHanoi do
       move = [0, 1]
       tower.make_move(move)
       tower.towers[0].length.should == 2
+      tower.towers[1].length.should == 1
     end
   end
 end

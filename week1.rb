@@ -1,3 +1,5 @@
+require 'debugger'
+
 class Array
   def my_uniq
     uniques = []
@@ -12,7 +14,6 @@ class Array
     length.times do |i1|
       length.times do |i2|
         next if i2 <= i1
-
         pair << [i1, i2] if self[i1] + self[i2] == 0
       end
     end
@@ -36,9 +37,11 @@ class TowersOfHanoi
 
   def valid_move?(move)
     return false if move.length != 2
-    move.each do |num|
-      return false if num > 2 || num < 0
+    return false if move[0] > 2 || move[0] < 0 || move[1] > 2 || move[1] < 0
+    unless @towers[move[1]].empty?
+      return false if @towers[move[0]].last > @towers[move[1]].last
     end
+    true
   end
 
   def make_move(move)
