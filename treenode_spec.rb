@@ -64,9 +64,23 @@ describe TreeNode do
     end
   end
 
-  describe "#bfs" do
-    
-  end
+  context "with larger tree" do
+    let(:node) do
+      node = TreeNode.new(1)
+      node.left_child = TreeNode.new(2)
+      node.left_child.left_child = TreeNode.new(3)
+      node.left_child.right_child = TreeNode.new(4)
+      node.right_child = TreeNode.new(5)
 
+      node
+    end
+
+    describe "#bfs" do
+      it "should return the correct node" do
+        node.bfs(3).should == node.left_child.left_child
+        node.bfs(5).should == node.right_child
+      end
+    end
+  end
 end
 

@@ -23,8 +23,19 @@ class TreeNode
     @right_child.parent = self
   end
 
-  def bfs
-
+  def bfs(value)
+    stack = [self]
+    while check = stack.shift
+      if check.value == value
+        return check
+      elsif check.left_child.nil? && check.right_child.nil?
+        nil
+      else
+        stack << check.left_child
+        stack << check.right_child
+      end
+    end
+    nil
   end
 
 end
