@@ -3,10 +3,11 @@ require_relative 'tictactoe'
 
 describe TicTacToe do
   subject(:game) { TicTacToe.new }
+  its(:pieces) { should eq({1 => :x, 2 => :o})}
 
-  describe "#buildboard" do
+  describe "#build_board" do
     it "should return a 3x3 two dimensional array" do
-      game.buildboard.should == [[nil, nil, nil],[nil, nil, nil],[nil, nil, nil]]
+      game.build_board.should == [[nil, nil, nil],[nil, nil, nil],[nil, nil, nil]]
     end
   end
   describe "#valid_move?" do
@@ -29,6 +30,15 @@ describe TicTacToe do
   end
 end
 
-describe ComputerPlayer do
-  
+describe HumanPlayer do
+  let(:game) { double("TicTacToe", :pieces => {1 => :x, 2 => :o}) }
+
+  subject(:human) { HumanPlayer.new(1, game) }
+  its(:piece) { should eq(:x) }
+
+  describe "#make_move" do
+    it "should return an array with two values" do
+      human.make_move.length.should == 2
+    end
+  end
 end

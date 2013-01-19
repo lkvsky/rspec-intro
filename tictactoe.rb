@@ -1,8 +1,13 @@
 class TicTacToe
-  attr_accessor :board
+  attr_accessor :board, :pieces
 
   def initialize
-    @board = buildboard
+    @board = build_board
+    @pieces = {1 => :x, 2 => :o}
+  end
+
+  def diagonals
+
   end
 
   def buildboard
@@ -18,4 +23,19 @@ class TicTacToe
   def win?
 
   end
+end
+
+class HumanPlayer
+  attr_accessor :piece, :game
+
+  def initialize(player_num, game)
+    @game = game
+    @piece = @game.pieces[player_num]
+  end
+
+  def make_move
+    puts "Where do you want to put your piece?"
+    gets.chomp.split.map! { |num| num.to_i }
+  end
+
 end
