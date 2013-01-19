@@ -57,6 +57,7 @@ describe TowersOfHanoi do
       tower.towers[1] = [1, 2, 3]
       tower.towers[2] = [0]
     end
+
     it "should return false if input does not contain two values" do
       input = [0, 1, 2]
       tower.valid_move?(input).should be_false
@@ -80,5 +81,19 @@ describe TowersOfHanoi do
       tower.towers[0].length.should == 2
       tower.towers[1].length.should == 1
     end
+  end
+end
+
+describe "#fibs_rec" do
+  it "should return the first fibonacci # if only 1 is sent" do
+    fibs_rec(1).should == [0]
+  end
+
+  it "should return the first 2 fibonacci's if 2 is sent" do
+    fibs_rec(2).should == [0,1]
+  end
+
+  it "should return the full fibonacci sequence if 5 is sent" do
+    fibs_rec(5).should == [0, 1, 1, 2, 3]
   end
 end

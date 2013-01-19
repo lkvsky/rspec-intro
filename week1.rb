@@ -51,3 +51,16 @@ class TowersOfHanoi
   end
 end
 
+def fibs_rec(count)
+  case count
+  when 1
+    [0]
+  when 2
+    [0, 1]
+  else
+    rest = fibs_rec(count -1)
+    one_more = rest[-2] + rest[-1]
+    rest << one_more
+  end
+end
+
